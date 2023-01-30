@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  proxysql:
+    image: percona/proxysql:2.0
+    volumes:
+      - ${PWD}/conf/proxysql/proxysql.cnf:/etc/proxysql/proxysql.cnf
+  mysql-shard-001:
+    image: &mysql-img mysql:5.7
+    command: &mysql-cmd --default-authentication-plugin=mysql_native_password
+    environment: &mysql-env
+      MYSQL_ROOT_PASSWORD: abc123
+    volumes:
+      - ${PWD}/conf/mysql/init/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  mysql-shard-002:
+    image: *mysql-img
+    command: *mysql-cmd
+    environment:
+      <<: *mysql-env
+    volumes:
+      - ${PWD}/conf/mysql/init/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
