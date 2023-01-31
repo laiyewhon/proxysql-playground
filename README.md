@@ -2,7 +2,7 @@
 
 ```shell
 # access proxysql
-docker exec -ti database-sharding-proxysql-1 mysql -u admin -padmin -h proxysql -P6032 --prompt 'ProxySQL Admin> '
+docker exec -ti proxysql-playground-proxysql-1 mysql -u admin -padmin -h proxysql -P6032 --prompt 'ProxySQL Admin> '
 
 # mysql shard 1
 docker exec -ti proxysql-playground-proxysql-1 mysql -u ashard -p -h mysql-shard-001
