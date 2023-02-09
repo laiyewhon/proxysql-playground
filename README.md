@@ -22,6 +22,7 @@ insert into mysql_servers(hostgroup_id, hostname, port) values (1, 'mysql-shard-
 LOAD MYSQL SERVERS TO RUNTIME;
 SAVE MYSQL SERVERS TO DISK;
 
+# password will be in plaintext when its inserted and hashed after being saved to disk
 insert into mysql_users(username, password, default_hostgroup) values ('test', 'abc123', 1);
 LOAD MYSQL USERS TO RUNTIME;
 SAVE MYSQL USERS FROM RUNTIME;
